@@ -41,32 +41,7 @@ app.get('/fetch-all-metrics', async (req, res) => {
       },
     });
 
-    const projectData = projectResponse.data.component;
-    const metrics = projectData.measures.reduce((acc, metric) => {
-      acc[metric.metric] = metric.value;
-      return acc;
-    }, {});
-
-    const result = {
-      project: projectData.key,
-      metrics,
-    };
-
-    // Save the data to a JSON file
-    const outputFilePath = path.join(__dirname, `${projectKey}-metrics.json`);
-    fs.writeFileSync(outputFilePath, JSON.stringify(result, null, 2));
-
-    console.log(`Metrics saved to ${outputFilePath}`);
-    res.json({ message: 'Metrics fetched successfully', filePath: outputFilePath });
-  } catch (error) {
-    console.error('Error fetching metrics:', error.response?.data || error.message);
-    res.status(500).json({ error: 'Failed to fetch metrics', details: error.response?.data || error.message });
-  }
-});
-
-
-
-// Mock Database
+    // Mock Database
 const database = {
   users: [],
   products: [],
@@ -202,6 +177,33 @@ for (let i = 1; i <= 100; i++) {
     }
   `);
 }
+
+
+    const projectData = projectResponse.data.component;
+    const metrics = projectData.measures.reduce((acc, metric) => {
+      acc[metric.metric] = metric.value;
+      return acc;
+    }, {});
+
+    const result = {
+      project: projectData.key,
+      metrics,
+    };
+
+    // Save the data to a JSON file
+    const outputFilePath = path.join(__dirname, `${projectKey}-metrics.json`);
+    fs.writeFileSync(outputFilePath, JSON.stringify(result, null, 2));
+
+    console.log(`Metrics saved to ${outputFilePath}`);
+    res.json({ message: 'Metrics fetched successfully', filePath: outputFilePath });
+  } catch (error) {
+    console.error('Error fetching metrics:', error.response?.data || error.message);
+    res.status(500).json({ error: 'Failed to fetch metrics', details: error.response?.data || error.message });
+  }
+});
+
+
+
 
 // Populate Database
 for (let i = 1; i <= MAX_ITEMS; i++) {
