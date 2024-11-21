@@ -64,36 +64,7 @@ app.get('/fetch-all-metrics', async (req, res) => {
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
-});
-// Configuration and Constants
-const BASE_API_URL = 'https://mockapi.example.com';
-const PROJECT_NAME = 'Mock Large File';
-const MAX_ITEMS = 100;
-const VERSION = '1.0.0';
 
-console.log(`Initializing ${PROJECT_NAME} (Version: ${VERSION})`);
-
-// Utilities
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function formatDate(date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-}
-
-function mockApiCall(endpoint, params = {}) {
-  console.log(`Calling Mock API: ${BASE_API_URL}${endpoint}`);
-  return {
-    success: true,
-    endpoint,
-    params,
-    timestamp: new Date().toISOString(),
-  };
-}
 
 // Mock Database
 const database = {
@@ -101,6 +72,35 @@ const database = {
   products: [],
   orders: [],
 };
+
+// Mock Data Generators
+function generateUser(id) {
+  return {
+    id,
+    name: `User${id}`,
+    email: `user${id}@example.com`,
+    createdAt: formatDate(new Date()),
+  };
+}
+
+function generateProduct(id) {
+  return {
+    id,
+    name: `Product${id}`,
+    price: getRandomInt(10, 500),
+    stock: getRandomInt(0, 100),
+  };
+}
+
+function generateOrder(id, userId, productId) {
+  return {
+    id,
+    userId,
+    productId,
+    quantity: getRandomInt(1, 10),
+    createdAt: formatDate(new Date()),
+  };
+}
 
 // Mock Data Generators
 function generateUser(id) {
@@ -203,100 +203,6 @@ for (let i = 1; i <= 100; i++) {
   `);
 }
 
-// Main Execution
-(async () => {
-  console.log('Starting main execution...');
-  
-  for (let i = 1; i <= 10; i++) {
-    const userId = getRandomInt(1, MAX_ITEMS);
-    const productId = getRandomInt(1, MAX_ITEMS);
-    
-    try {
-      const userReport = await processUser(userId);
-      const productReport = await processProduct(productId);
-      
-      console.log('User Report:', userReport);
-      console.log('Product Report:', productReport);
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  }
-  
-  console.log('Executing utility functions...');
-  Object.keys(utils).forEach((key) => utils[key]());
-  
-  console.log('Calculating metrics...');
-  for (let i = 1; i <= 10; i++) {
-    const metricValue = calculateMetric10(i);
-    console.log(`Metric for ${i}:`, metricValue);
-  }
-  
-  console.log('Main execution completed.');
-})();
-
-// Configuration and Constants
-const BASE_API_URL = 'https://mockapi.example.com';
-const PROJECT_NAME = 'Mock Large File';
-const MAX_ITEMS = 100;
-const VERSION = '1.0.0';
-
-console.log(`Initializing ${PROJECT_NAME} (Version: ${VERSION})`);
-
-// Utilities
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function formatDate(date) {
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-}
-
-function mockApiCall(endpoint, params = {}) {
-  console.log(`Calling Mock API: ${BASE_API_URL}${endpoint}`);
-  return {
-    success: true,
-    endpoint,
-    params,
-    timestamp: new Date().toISOString(),
-  };
-}
-
-// Mock Database
-const database = {
-  users: [],
-  products: [],
-  orders: [],
-};
-
-// Mock Data Generators
-function generateUser(id) {
-  return {
-    id,
-    name: `User${id}`,
-    email: `user${id}@example.com`,
-    createdAt: formatDate(new Date()),
-  };
-}
-
-function generateProduct(id) {
-  return {
-    id,
-    name: `Product${id}`,
-    price: getRandomInt(10, 500),
-    stock: getRandomInt(0, 100),
-  };
-}
-
-function generateOrder(id, userId, productId) {
-  return {
-    id,
-    userId,
-    productId,
-    quantity: getRandomInt(1, 10),
-    createdAt: formatDate(new Date()),
-  };
-}
-
 // Populate Database
 for (let i = 1; i <= MAX_ITEMS; i++) {
   database.users.push(generateUser(i));
@@ -369,33 +275,7 @@ for (let i = 1; i <= 100; i++) {
   `);
 }
 
-// Main Execution
-(async () => {
-  console.log('Starting main execution...');
-  
-  for (let i = 1; i <= 10; i++) {
-    const userId = getRandomInt(1, MAX_ITEMS);
-    const productId = getRandomInt(1, MAX_ITEMS);
-    
-    try {
-      const userReport = await processUser(userId);
-      const productReport = await processProduct(productId);
-      
-      console.log('User Report:', userReport);
-      console.log('Product Report:', productReport);
-    } catch (error) {
-      console.error('Error:', error.message);
-    }
-  }
-  
-  console.log('Executing utility functions...');
-  Object.keys(utils).forEach((key) => utils[key]());
-  
-  console.log('Calculating metrics...');
-  for (let i = 1; i <= 10; i++) {
-    const metricValue = calculateMetric10(i);
-    console.log(`Metric for ${i}:`, metricValue);
-  }
-  
-  console.log('Main execution completed.');
-})();
+
+
+
+
