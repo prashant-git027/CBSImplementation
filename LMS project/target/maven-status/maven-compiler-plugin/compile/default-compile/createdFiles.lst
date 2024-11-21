@@ -1,0 +1,4 @@
+com\bezkoder\spring\jpa\postgresql\SpringBootJpaPostgresqlApplication.class
+com\bezkoder\spring\jpa\postgresql\controller\TutorialController.class
+com\bezkoder\spring\jpa\postgresql\model\Tutorial.class
+com\bezkoder\spring\jpa\postgresql\repository\TutorialRepository.class
