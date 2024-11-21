@@ -8,7 +8,7 @@ const app = express();
 // Configuration
 const SONARQUBE_URL = 'https://sonarcloud.io'; // Replace with your SonarQube server URL
 const TOKEN = 'YOUR_SONARQUBE_TOKEN'; // Replace with your SonarQube token
-const PORT = 3000;
+const PORT = 4000;
 
 // Middleware to parse JSON requests
 app.use(express.json());
